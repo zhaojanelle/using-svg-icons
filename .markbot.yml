@@ -1,0 +1,53 @@
+repo: 'using-svg-icons'
+canvasCourse: 'web-dev-3'
+
+inherit:
+  - naming-restrict-live
+  - git-2
+  - html
+  - css
+  - modulifier
+  - css-order-modules-main
+
+html:
+  - path: 'index.html'
+    outline: false
+    has:
+      - 'ul.list-group-inline > li.center-text > a.block > i.icon.i-96 > svg > use'
+      - 'ul > li:nth-child(3)'
+    search:
+      - '#brachiosaurus'
+      - '#micropachycephalosaurus'
+      - '#velociraptor'
+      - 'Brachiosaurus'
+      - 'Micropachycephalosaurus'
+      - 'Velociraptor'
+
+css:
+  - path: 'css/main.css'
+    has:
+      - ['a', 'color', '#76a500']
+      - ['a:hover', 'color', '#acc300']
+
+screenshots:
+  - path: 'index.html'
+    label: 'Before'
+    sizes: [960]
+  - path: 'index.html'
+    label: 'After'
+    useAnimations: true
+    sizes: [960]
+    before: |
+      hover('.list-group-inline > li > a', done);
+
+functionality:
+  - path: 'index.html'
+    tests:
+      - |
+        let link = $('.list-group-inline > li > a');
+        let oldBg = css(link).color;
+
+        hover(link, function () {
+          if (css(link).color == oldBg) return fail('The colour of the icon links doesn’t change when hovered');
+          pass();
+        });
